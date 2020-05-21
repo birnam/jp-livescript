@@ -416,7 +416,7 @@ function showUsage(options) {
 }
 
 function setJupyterInfoAsync(context, callback) {
-    exec("jupyter --version", function(error, stdout, stderr) {
+    exec("jupyter --version | grep core | head -1 | awk '{ print \$4 }'", function(error, stdout, stderr) {
         if (error) {
             context.frontend.error = error;
             setIPythonInfoAsync(context, callback);
